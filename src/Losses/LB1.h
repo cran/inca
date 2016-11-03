@@ -6,7 +6,7 @@
 namespace LB1 {
 
     double ff(const colvec& L, const colvec& U, const colvec& e) {
-        int i;
+        size_t i;
         double loss = 0.0;
         for (i = 0; i < e.size(); i++) {
             if (L[i] > e[i]) {
@@ -26,7 +26,7 @@ namespace LB1 {
     }
 
     template <typename T> int updategrd(const T& A, const mat& B, const colvec& s, const colvec& ee, colvec& grad, umat& ord, int j) {
-        int i;
+        size_t i;
         bool ch = false;
         colvec u = conv_to<colvec>::from(ee > B.col(1)) - conv_to<colvec>::from(ee < B.col(0));
         u -= s;
@@ -37,7 +37,7 @@ namespace LB1 {
             }
         }
         if (ch) {
-            ord = sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), 1);
             j = -1;
         }
         return j;

@@ -1,7 +1,7 @@
 # inca: an R package for integer calibration
 
 ### Authors
-[Luca Sartore](mailto://luca.sartore@nass.usda.gov), [Kelly Toppin](mailto://kelly.toppin@nass.usda.gov) and [Clifford H. Spiegelman](mailto://cliff.spiegelman@nass.usda.gov)
+[Luca Sartore](mailto://luca.sartore@nass.usda.gov) and [Kelly Toppin](mailto://kelly.toppin@nass.usda.gov)
 
 Maintainer: [Luca Sartore](mailto://drwolf85@gmail.com)
 

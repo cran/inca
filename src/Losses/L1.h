@@ -15,7 +15,7 @@ namespace L1 {
     }
 
     template <typename T> int updategrd(const T& A, const colvec& s, const colvec& ee, colvec& grad, umat& ord, int j) {
-        int i;
+        size_t i;
         bool ch = false;
         colvec u = sign(ee) - s;
         for (i = 0; i < u.size(); i++) {
@@ -26,7 +26,7 @@ namespace L1 {
         }
         if (ch) {
 //            Rprintf("MaxAbsDeltaGrad: %f\n", max(abs(grad - ffGrd(A, sign(ee)))));
-            ord = sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), 1);
             j = -1;
         }
         return j;

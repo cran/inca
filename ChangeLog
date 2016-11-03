@@ -1,0 +1,23 @@
+2016-09-14 Luca Sartore <drwolf85@gmail.com>
+	* DESCRIPTION (Version): New version is 0.0.2
+	* DESCRIPTION (Date): New date is 2016-09-14
+	* inca.R: All references to the new version and date are now
+           changed to match those in the DESCRIPTION file
+	* inst/INSTALL.md: All references to the new version are now
+           changed to match those in the DESCRIPTION file
+	* src/Losses/aL1.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/Losses/L1.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/Losses/LB1.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/Losses/rB1.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/Losses/rL1.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/bestRound.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* src/intCalib.h: The armadillo `sort_index()` function is
+	    now replaced by `stable_sort_index()`
+	* THANKS: Included a further contributor who discovered a bug
+

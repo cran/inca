@@ -6,7 +6,7 @@
 namespace rB2 {
 
     double ff(const colvec& L, const colvec& U, const colvec& e) {
-        int i;
+        size_t i;
         double tmpl, loss = 0.0;
         for (i = 0; i < e.size(); i++) {
             if (L[i] > e[i]) {
@@ -22,7 +22,7 @@ namespace rB2 {
     }
 
     template <typename T> colvec ffGrd(const T& A, const colvec& e, const colvec& L, const colvec& U) {
-        int i;
+        size_t i;
         colvec Df = zeros<colvec>(e.size());
         for (i = 0; i < e.size(); i++) {
             if (L[i] > e[i]) {

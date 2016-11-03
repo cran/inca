@@ -15,7 +15,8 @@ namespace aL1 {
     }
 
     template <typename T> int updategrd(const T& A, const colvec& s, const colvec& ee, colvec& grad, umat& ord, int j) {
-        int i, u;
+        size_t i;
+        int u;
         if (any((s < 0) != (ee < 0))) {
             for (i = 0; i < s.size(); i++) {
                 u = (ee[i] < 0) - (s[i] < 0);
@@ -23,7 +24,7 @@ namespace aL1 {
                     grad -= A.row(i).t() * u;
                 }
             }
-            ord = sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), 1);
             j = -1;
         }
         return j;

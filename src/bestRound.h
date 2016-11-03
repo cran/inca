@@ -27,7 +27,7 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
      */
 
     int i, j;
-    double mantissa, ffnew, ffcm, ffcp;
+    double mantissa, ffcm, ffcp;
     LogicalVector ismod(w.size(), true); // Is the i-th weight modifiable?
     colvec grad(w.size());
     colvec ee(y.size());
@@ -36,6 +36,7 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
     colvec s, tau, lambda, iscale;
     umat ord;
 #if _DEBUG
+    double ffnew;
     int oobo;
     time_t now;
 #endif // _DEBUG
@@ -108,11 +109,11 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
         grad.zeros();
         break;
     }
-    ord = sort_index(abs(grad), 1); // sort the gradient
+    ord = stable_sort_index(abs(grad), 1); // sort the gradient
 
     for (j = 0; ; j = 0) {
-        for (; j < w.size(); j++) if(ismod[ord[j]]) break; // find roundable position
-        if (j >= w.size()) break;
+        for (; (size_t) j < w.size(); j++) if(ismod[ord[j]]) break; // find roundable position
+        if ((size_t) j >= w.size()) break;
         i = ord[j];
         ismod[i] = false;
         mantissa = w[i] - trunc(w[i]);
@@ -165,29 +166,39 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
             ffcp = rB2::ff(Bnds.col(0), Bnds.col(1), tmpEp);
             break;
         default:
+            ffcm = 0.0;
+            ffcp = 0.0;
             break;
         }
         if (ffcm < ffcp) {
             ee = tmpEm;
             w[i] = trunc(w[i]);
+#if _DEBUG
             ffnew = ffcm;
+#endif // _DEBUG
         }
         else {
             if (ffcm > ffcp) {
                 ee = tmpEp;
                 w[i] = ceil(w[i]);
+#if _DEBUG
                 ffnew = ffcp;
+#endif // _DEBUG
             }
             else {
                 if (mantissa < 0.5) {
                     ee = tmpEm;
                     w[i] = trunc(w[i]);
+#if _DEBUG
                     ffnew = ffcm;
+#endif // _DEBUG
                 }
                 else {
                     ee = tmpEp;
                     w[i] = ceil(w[i]);
+#if _DEBUG
                     ffnew = ffcp;
+#endif // _DEBUG
                 }
             }
         }
@@ -234,11 +245,11 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
             break;
         }
         if (!IS_L1BASED(lt)) {
-            ord = sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), 1);
         }
 #if _DEBUG
         now = std::time(0);
-        for (i = 0, oobo = 0; i < ee.size(); i++) {
+        for (i = 0, oobo = 0; (size_t) i < ee.size(); i++) {
             if (ee[i] < Bnds.col(0)[i] || ee[i] > Bnds.col(1)[i]) oobo++;
         }
 #if _DEBUG != 2

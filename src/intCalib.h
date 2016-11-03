@@ -10,7 +10,7 @@ using namespace Rcpp;
 // Calculate the number of fitted targets outside the boundaries
 int countOOB(const colvec& L, const colvec& U, const colvec& e) {
     int i, oob = 0;
-    for (i = 0; i < e.size(); i++) {
+    for (i = 0; (size_t) i < e.size(); i++) {
         if (L[i] > e[i] || U[i] < e[i]) oob++;
     }
     return oob;
@@ -93,7 +93,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
         break;
     case LOSS_RBLASSO1:
     case LOSS_RBLASSO2:
-        for (i = 0; i < w.size(); i++) {
+        for (i = 0; (size_t) i < w.size(); i++) {
             if (w[i] < lower[i]) {
                 w[i] = lower[i];
             }
@@ -243,7 +243,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
             grad.zeros();
             break;
         }
-        ord = sort_index(abs(grad), 1);
+        ord = stable_sort_index(abs(grad), 1);
 
         /* Reset the counter of any change in vector w */
         ac = 0;
@@ -252,7 +252,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
         pos = 0;
 #endif // _POSCHK
 #endif // _DEBUG
-        for (j = 0; j < w.size(); j++) {
+        for (j = 0; (size_t) j < w.size(); j++) {
             R_CheckUserInterrupt();
             /* Consider the weights with the most effective reduction,
              * change them according to the gradient, and update
@@ -406,7 +406,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
                     break;
                 }
                 if (!IS_L1BASED(lt)) { // if the objective function is based on L2-norm (or L0-norm)
-                    nord = sort_index(abs(grad), 1); //sort the gradient
+                    nord = stable_sort_index(abs(grad), 1); //sort the gradient
                     if (any(conv_to<vec>::from(nord != ord))) { // and calculate the position according to the changes
                         j = -1;
                         ord = nord;

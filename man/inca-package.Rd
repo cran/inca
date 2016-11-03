@@ -12,8 +12,8 @@ Specific functions are provided for rounding real weights to integers and perfor
 \tabular{ll}{
 Package: \tab inca\cr
 Type: \tab Package\cr
-Version: \tab 2016-08-03\cr
-Date: \tab 0.0.1\cr
+Version: \tab 2016-09-14\cr
+Date: \tab 0.0.2\cr
 License: \tab GPL (>= 2)\cr
 }
 

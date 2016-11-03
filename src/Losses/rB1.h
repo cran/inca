@@ -7,7 +7,7 @@
 namespace rB1 {
 
     double ff(const colvec& L, const colvec& U, const colvec& e) {
-        int i;
+        size_t i;
         double loss = 0.0;
         for (i = 0; i < e.size(); i++) {
             if (L[i] > e[i]) {
@@ -22,7 +22,7 @@ namespace rB1 {
     }
 
     template <typename T> colvec ffGrd(const T& A, const colvec& e, const colvec& L, const colvec& U) {
-        int i;
+        size_t i;
         colvec Df = zeros<colvec>(e.size());
         for (i = 0; i < e.size(); i++) {
             if (L[i] > e[i]) {
@@ -38,7 +38,7 @@ namespace rB1 {
     }
 
     template <typename T> int updategrd(const T& A, const mat& B, const colvec& s, const colvec& ee, colvec& grad, umat& ord, int j) {
-        int i;
+        size_t i;
         bool ch = false;
         colvec Df = conv_to<colvec>::from(ee > B.col(1)) / B.col(1) - conv_to<colvec>::from(ee < B.col(0)) / abs(B.col(0));
         colvec u = conv_to<colvec>::from(s > 0) / B.col(1) - conv_to<colvec>::from(s < 0) / abs(B.col(0));
@@ -50,7 +50,7 @@ namespace rB1 {
             }
         }
         if (ch) {
-            ord = sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), 1);
             j = -1;
         }
 //colvec gradstd = ffGrd(A, ee, B.col(0), B.col(1));
