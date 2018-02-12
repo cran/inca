@@ -32,4 +32,3 @@ aw <- adjWeights(w, runif(150, -3, -1), runif(150, 1, 3))
 hist(aw, main = "Adjusted weights")
 
 }
-

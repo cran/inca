@@ -2,8 +2,8 @@
 % Please edit documentation in R/inca.R
 \docType{package}
 \name{inca-package}
-\alias{inca}
 \alias{inca-package}
+\alias{inca}
 \title{Integer Calibration}
 \description{
 Specific functions are provided for rounding real weights to integers and performing an integer programming algorithm for calibration problems
@@ -12,8 +12,8 @@ Specific functions are provided for rounding real weights to integers and perfor
 \tabular{ll}{
 Package: \tab inca\cr
 Type: \tab Package\cr
-Version: \tab 2016-09-14\cr
-Date: \tab 0.0.2\cr
+Version: \tab 2018-02-09\cr
+Date: \tab 0.0.3\cr
 License: \tab GPL (>= 2)\cr
 }
 
@@ -32,11 +32,6 @@ For a complete list of exported functions, use \code{library(help = "inca")}.
 library(inca)
 
 }
-\author{
-Luca Sartore \email{luca.sartore@nass.usda.gov} and Kelly Toppin \email{kelly.toppin@nass.usda.gov}
-
-Maintainer: Luca Sartore \email{drwolf85@gmail.com}
-}
 \references{
 Theberge, A. (1999). Extensions of calibration estimators in survey sampling. Journal of the American Statistical Association, 94(446), 635-644.
 
@@ -52,7 +47,11 @@ Horvitz, D. G., & Thompson, D. J. (1952). A generalization of sampling without r
 
 Kalton, G., & Flores-Cervantes, I. (2003). Weighting methods. Journal of Official Statistics, 19(2), 81-98.
 }
+\author{
+Luca Sartore \email{luca.sartore@nass.usda.gov} and Kelly Toppin \email{kelly.toppin@nass.usda.gov}
+
+Maintainer: Luca Sartore \email{drwolf85@gmail.com}
+}
 \keyword{calibration}
 \keyword{integer}
 \keyword{rounding}
-

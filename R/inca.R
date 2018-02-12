@@ -1,7 +1,7 @@
 #' @importFrom stats model.matrix.lm
 #' @importFrom Matrix Matrix
 #' @importFrom Rcpp evalCpp
-#' @useDynLib inca
+#' @useDynLib inca, .registration = TRUE
 #'
 #' @name inca-package
 #' @aliases inca
@@ -18,8 +18,8 @@
 #' \tabular{ll}{
 #' Package: \tab inca\cr
 #' Type: \tab Package\cr
-#' Version: \tab 2016-09-14\cr
-#' Date: \tab 0.0.2\cr
+#' Version: \tab 2018-02-09\cr
+#' Date: \tab 0.0.3\cr
 #' License: \tab GPL (>= 2)\cr
 #' }
 #' 

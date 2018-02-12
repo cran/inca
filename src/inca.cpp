@@ -12,6 +12,11 @@
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
+void R_init_inca(DllInfo *info) {
+  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, TRUE);
+}
+
 using namespace arma;
 using namespace Rcpp;
 

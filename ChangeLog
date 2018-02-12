@@ -1,3 +1,17 @@
+2018-02-09 Luca Sartore <drwolf85@gmail.com>
+	* DESCRIPTION (Version): New version is 0.0.3
+	* DESCRIPTION (Date): New date is 2018-02-09
+	* inca.R: All references to the new version and date are now
+           changed to match those in the DESCRIPTION file
+	* inst/INSTALL.md: All references to the new version are now
+           changed to match those in the DESCRIPTION file
+	* src/inca.cpp: The new routine `R_init_inca` is now added
+	       to register routines and improving the use of dynamic
+	       symbols
+	* inca.R: It was updated the `@useDynLib` to allowed for the
+	       registration of routines
+	* README.md: A duplicated reference was removed
+
 2016-09-14 Luca Sartore <drwolf85@gmail.com>
 	* DESCRIPTION (Version): New version is 0.0.2
 	* DESCRIPTION (Date): New date is 2016-09-14

@@ -71,4 +71,3 @@ rw <- roundWeights(w, ~. + 0, y, lower = 1, upper = 7, sparse = TRUE, data = dat
 barplot(table(rw), main = "Rounded weigths")
 
 }
-

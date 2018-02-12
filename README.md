@@ -38,7 +38,5 @@ Rao, J. N. K., & Singh, A. C. (1997). A ridge-shrinkage method for range-restric
 
 Horvitz, D. G., & Thompson, D. J. (1952). A generalization of sampling without replacement from a finite universe. Journal of the American Statistical Association, 47(260), 663-685.
 
-Horvitz, D. G., & Thompson, D. J. (1952). A generalization of sampling without replacement from a finite universe. Journal of the American Statistical Association, 47(260), 663-685.
-
 Kalton, G., & Flores-Cervantes, I. (2003). Weighting methods. Journal of Official Statistics, 19(2), 81-98.
 

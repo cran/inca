@@ -73,4 +73,3 @@ print(sum(abs(y - data \%*\% cw)))
 barplot(table(cw), main = "Calibrated integer weights")
 
 }
-
