@@ -79,7 +79,7 @@
   myupper <- pmin(floor(upper), abs(weights) * Inf)
   wts <- adjWeights(weights, lower = mylower, upper = myupper)
 
-  A <- model.matrix.lm(formula, data = as.data.frame(data))
+  A <- model.matrix(formula, data = as.data.frame(data))
   if(sparse) {
     A <- Matrix(A, sparse = TRUE)
     wts <- .Call('sparse_round', PACKAGE = 'inca', A, targets, wts, tgtBnds, scale, objective[1])

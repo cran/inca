@@ -109,7 +109,7 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
         grad.zeros();
         break;
     }
-    ord = stable_sort_index(abs(grad), 1); // sort the gradient
+    ord = stable_sort_index(abs(grad), "descend"); // sort the gradient
 
     for (j = 0; ; j = 0) {
         for (; (size_t) j < w.size(); j++) if(ismod[ord[j]]) break; // find roundable position
@@ -245,7 +245,7 @@ template <typename Type> colvec bestRound(const Type& A, const colvec& y, colvec
             break;
         }
         if (!IS_L1BASED(lt)) {
-            ord = stable_sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), "descend");
         }
 #if _DEBUG
         now = std::time(0);

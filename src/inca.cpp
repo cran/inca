@@ -20,9 +20,6 @@ void R_init_inca(DllInfo *info) {
 using namespace arma;
 using namespace Rcpp;
 
-#include "bestRound.h"
-#include "intCalib.h"
-
 #ifndef _DEBUG // Debug modality (usaully passed via gpp -D_DEBUG=1)
     #define _DEBUG 0
 /* DEFINITION OF "_DEBUG" preprocessor expression
@@ -40,6 +37,10 @@ using namespace Rcpp;
  */
     #endif // _POSCHK
 #endif // _DEBUG
+
+#include "bestRound.h"
+#include "intCalib.h"
+//#include "qininCalib.h"
 
 colvec de_round(const mat& A, const colvec& y, colvec& w,
              const mat& Bnds, const vec& scale,
@@ -164,3 +165,91 @@ RcppExport SEXP dense_ipc(SEXP ASEXP, SEXP ySEXP, SEXP wSEXP, SEXP lowerSEXP, SE
         return __result;
     END_RCPP
 }
+/*
+colvec sp_qiipc(const sp_mat& A, const colvec& y, colvec& w,
+                const vec lower, const vec upper, const mat& Bnds,
+                const vec& scale, const size_t nsim, const double memrate,
+                const std::string lossType) {
+    // Quantum Inspired Integer Programming Calibration for Sparse Matrices
+    int lt = 0;
+    if(lossType == "L1") lt = LOSS_L1;
+    if(lossType == "aL1") lt = LOSS_aL1;
+    if(lossType == "rL1") lt = LOSS_rL1;
+    if(lossType == "LB1") lt = LOSS_LB1;
+    if(lossType == "rB1") lt = LOSS_rB1;
+    if(lossType == "rbLasso1") lt = LOSS_RBLASSO1;
+    if(lossType == "L2") lt = LOSS_L2;
+    if(lossType == "aL2") lt = LOSS_aL2;
+    if(lossType == "rL2") lt = LOSS_rL2;
+    if(lossType == "LB2") lt = LOSS_LB2;
+    if(lossType == "rB2") lt = LOSS_rB2;
+    if(lossType == "rbLasso2") lt = LOSS_RBLASSO2;
+    colvec dse(IS_RBLASSO(lt) ? w.size() : 1);
+    if (IS_RBLASSO(lt)) dse = w + 0.0;
+    w = bestRound(A, y, w, Bnds, scale, lossType);
+    w = IntProgCalib(A, y, w, dse, lower, upper, Bnds, scale, lossType);
+    return QInInPrCalib(A, y, w, dse, lower, upper, Bnds, scale, nsim, memrate, lossType);
+}
+
+RcppExport SEXP sparse_qiipc(SEXP ASEXP, SEXP ySEXP, SEXP wSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP BndsSEXP, SEXP scaleSEXP, SEXP nsimSEXP, SEXP memrateSEXP, SEXP lossTypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const sp_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const colvec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< colvec& >::type w(wSEXP);
+    Rcpp::traits::input_parameter< const vec >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< const vec >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< const mat& >::type Bnds(BndsSEXP);
+    Rcpp::traits::input_parameter< const vec& >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type nsim(nsimSEXP);
+    Rcpp::traits::input_parameter< const double >::type memrate(memrateSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type lossType(lossTypeSEXP);
+    __result = Rcpp::wrap(sp_qiipc(A, y, w, lower, upper, Bnds, scale, nsim, memrate, lossType));
+    return __result;
+END_RCPP
+}
+
+colvec de_qiipc(const mat& A, const colvec& y, colvec& w,
+                const vec lower, const vec upper, const mat& Bnds,
+                const vec& scale, const size_t nsim, const double memrate,
+                const std::string lossType) {
+    // Quantum Inspired Integer Programming Calibration for Sparse Matrices
+    int lt = 0;
+    if(lossType == "L1") lt = LOSS_L1;
+    if(lossType == "aL1") lt = LOSS_aL1;
+    if(lossType == "rL1") lt = LOSS_rL1;
+    if(lossType == "LB1") lt = LOSS_LB1;
+    if(lossType == "rB1") lt = LOSS_rB1;
+    if(lossType == "rbLasso1") lt = LOSS_RBLASSO1;
+    if(lossType == "L2") lt = LOSS_L2;
+    if(lossType == "aL2") lt = LOSS_aL2;
+    if(lossType == "rL2") lt = LOSS_rL2;
+    if(lossType == "LB2") lt = LOSS_LB2;
+    if(lossType == "rB2") lt = LOSS_rB2;
+    if(lossType == "rbLasso2") lt = LOSS_RBLASSO2;
+    colvec dse(IS_RBLASSO(lt) ? w.size() : 1);
+    if (IS_RBLASSO(lt)) dse = w + 0.0;
+    w = bestRound(A, y, w, Bnds, scale, lossType);
+    w = IntProgCalib(A, y, w, dse, lower, upper, Bnds, scale, lossType);
+    return QInInPrCalib(A, y, w, dse, lower, upper, Bnds, scale, nsim, memrate, lossType);
+}
+
+RcppExport SEXP dense_qiipc(SEXP ASEXP, SEXP ySEXP, SEXP wSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP BndsSEXP, SEXP scaleSEXP, SEXP nsimSEXP, SEXP memrateSEXP, SEXP lossTypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< const mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const colvec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< colvec& >::type w(wSEXP);
+    Rcpp::traits::input_parameter< const vec >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< const vec >::type upper(upperSEXP);
+    Rcpp::traits::input_parameter< const mat& >::type Bnds(BndsSEXP);
+    Rcpp::traits::input_parameter< const vec& >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< const size_t >::type nsim(nsimSEXP);
+    Rcpp::traits::input_parameter< const double >::type memrate(memrateSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type lossType(lossTypeSEXP);
+    __result = Rcpp::wrap(de_qiipc(A, y, w, lower, upper, Bnds, scale, nsim, memrate, lossType));
+    return __result;
+END_RCPP
+}*/

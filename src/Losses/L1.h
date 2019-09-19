@@ -26,7 +26,7 @@ namespace L1 {
         }
         if (ch) {
 //            Rprintf("MaxAbsDeltaGrad: %f\n", max(abs(grad - ffGrd(A, sign(ee)))));
-            ord = stable_sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), "descend");
             j = -1;
         }
         return j;

@@ -24,7 +24,7 @@ namespace aL1 {
                     grad -= A.row(i).t() * u;
                 }
             }
-            ord = stable_sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), "descend");
             j = -1;
         }
         return j;

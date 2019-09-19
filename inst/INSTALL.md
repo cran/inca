@@ -3,7 +3,7 @@
 ## Requirements
 Most recent versions of the following software are always preferred, however the minimal requirements are also specified. The common software required by three main-stream operative systems are provided below, and any specific requirement is treated separately:
 
- * [R software](http://www.r-project.org/): the minimal requirement is R version 3.0.0.
+ * [R software](http://www.r-project.org/): the minimal requirement is R version 3.5.1.
 
  * [R packages](http://cran.r-project.org/) (it is recommended if the most recent versions of the following packages are installed):
      * `Rcpp`, for interfacing C++ code with R;
@@ -37,20 +37,20 @@ The additional software must be installed before to update the required packages
 ## Package management
 ### Installing the stable release of the inca package
 
-The use of the following R command is highly suggested to install the *inca* package:
+The use of the following R command is highly suggested to install the **inca** package:
 ```R
 install.packages("inca")
 ```
 
 The other alternative to install an R package is from its source-code compressed as a tarball archive. This can be done by entering the following command into a terminal session on **Linux** and **(Mac) OS X**  :
 ```bash
-R CMD INSTALL inca_0.0.3.tar.gz
+R CMD INSTALL inca_0.0.4.tar.gz
 ```
 
 On **Windows**, by opening the command prompt (`cmd.exe`), it is possible to point to the proper directory with `cd`, and then install the package via `Rcmd.exe` with the following command:
 
 ```bash
-Rcmd.exe INSTALL inca_0.0.3.tar.gz
+Rcmd.exe INSTALL inca_0.0.4.tar.gz
 ```
 
 More details can be found on the "Installing packages" section of the [R-admin](https://cran.r-project.org/doc/manuals/R-admin.html) manual.
@@ -61,13 +61,13 @@ devtools::install_github("drwolf85/inca")
 ```
 
 ### Updating the inca package
-To update the *inca* package, it is necessary to type the following code from the R console:
+To update the **inca** package, it is necessary to type the following code from the R console:
 ```R
 update.packages("inca")
 ```
 
 ### Removing the inca package
-To remove *inca* from the list of R packages, it is necessary to type the following code from the R console:
+To remove **inca** from the list of R packages, it is necessary to type the following code from the R console:
 ```R
 remove.packages("inca")
 ```

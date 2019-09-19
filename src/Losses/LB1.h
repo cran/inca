@@ -37,7 +37,7 @@ namespace LB1 {
             }
         }
         if (ch) {
-            ord = stable_sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), "descend");
             j = -1;
         }
         return j;

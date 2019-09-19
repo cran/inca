@@ -60,9 +60,9 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
     colvec ee(y.size());
     colvec tmpE(y.size());
     double ffnew, ffcc;
-    double minPen, totPen;
+    double minPen = 0.0, totPen = 0.0;
     int oob, oobo;
-    colvec s(w.size());
+    colvec s(y.size());
     colvec sp(w.size());
     colvec pen(w.size()), tpen(w.size());
     umat ord, nord;
@@ -243,7 +243,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
             grad.zeros();
             break;
         }
-        ord = stable_sort_index(abs(grad), 1);
+        ord = stable_sort_index(abs(grad), "descend");
 
         /* Reset the counter of any change in vector w */
         ac = 0;
@@ -406,7 +406,7 @@ template <typename Type> colvec IntProgCalib(const Type& A, const colvec& y, col
                     break;
                 }
                 if (!IS_L1BASED(lt)) { // if the objective function is based on L2-norm (or L0-norm)
-                    nord = stable_sort_index(abs(grad), 1); //sort the gradient
+                    nord = stable_sort_index(abs(grad), "descend"); //sort the gradient
                     if (any(conv_to<vec>::from(nord != ord))) { // and calculate the position according to the changes
                         j = -1;
                         ord = nord;

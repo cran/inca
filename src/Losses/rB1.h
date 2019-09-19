@@ -50,7 +50,7 @@ namespace rB1 {
             }
         }
         if (ch) {
-            ord = stable_sort_index(abs(grad), 1);
+            ord = stable_sort_index(abs(grad), "descend");
             j = -1;
         }
 //colvec gradstd = ffGrd(A, ee, B.col(0), B.col(1));
